@@ -85,7 +85,7 @@ class SubscribersController < StatusBoardWidgets
     datapoints = []
     stats.each do |entry|
       datapoints << {
-        title: Time.at(entry["day"]).strftime("%-m–%e"),
+        title: Time.at(entry["day"]).strftime("%-m&ndash;%e"),
         value: entry['greader']
       }
     end
