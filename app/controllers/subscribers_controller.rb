@@ -38,7 +38,7 @@ class SubscribersController < StatusBoardWidgets
       }
     }
   
-    feed_params.each do |key, feed|
+    feed_params.each do |key, feed, color|
       stats = fetch_subscribers(api_key, token, feed, true)
       
       if feed_params.size == 1
@@ -60,7 +60,7 @@ class SubscribersController < StatusBoardWidgets
 
   def create_counts(feed_params, api_key, token)
     counts = []
-    feed_params.each do |key, feed|
+      feed_params.each do |key, feed, color|
       stats = fetch_subscribers(params[:api_key], params[:token], feed, color)
       counts << {
         name: feed.gsub('-', ' '),
@@ -70,7 +70,7 @@ class SubscribersController < StatusBoardWidgets
     counts = counts.sort_by { |k| k[:count] }.reverse
   end
 
-  def fetch_subscribers(key, token, feed, history=false)
+  def fetch_subscribers(key, token, feed, color, history=false)
     uri = URI.parse("http://api.uri.lv/feeds/subscribers.json")
       parameters = { :key => key, :token => token, :feed => feed :color => color}
     uri.query = URI.encode_www_form(parameters)
